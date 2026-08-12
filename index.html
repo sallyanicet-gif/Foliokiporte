@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>XP Window Manager Starter</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/xp.css" />
+  </head>
+  <body>
+    <!-- Boot screen -->
+    <div id="boot-screen" class="screen">
+      <div id="boot-logo">Silly OS</div>
+      <div id="boot-sub">STARTING UP</div>
+      <div id="boot-bar-track">
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+        <div class="boot-chunk"></div>
+      </div>
+      <div id="boot-hint">Press F11 for full screen</div>
+    </div>
+
+    <!-- Login screen -->
+    <div id="login-screen" class="screen" style="display: none">
+      <div id="login-header">Silly OS</div>
+      <div id="login-card">
+        <div id="login-avatar"><img src="icons/aboutme.png" alt="Girl in a jacket" width="64" height="64" /></div>
+        <div id="login-name">Neidjah ANICET</div>
+        <div id="login-hint">Click your picture to log in</div>
+      </div>
+      <div id="welcome-text">Welcome</div>
+      <div id="login-footer">Visual Designer</div>
+    </div>
+
+    <!-- Desktop app shell (hidden until login) -->
+    <div id="app-shell">
+      <div id="desktop">
+        <div class="icons" id="icons"></div>
+      </div>
+
+      <div id="taskbar">
+        <div id="start-btn"><span>&#9635;</span> start</div>
+        <div id="taskbar-items"></div>
+        <div id="clock">12:00 PM</div>
+      </div>
+
+      <div id="start-menu">
+        <div class="header">User</div>
+        <ul>
+          <li data-open="about">About Me</li>
+          <li data-open="projects">My Projects</li>
+          <li data-open="contact">Contact Me</li>
+          <li data-open="curryvital">Curriculum Vitae.doc</li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

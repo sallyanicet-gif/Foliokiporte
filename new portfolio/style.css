@@ -1,0 +1,659 @@
+:root {
+  --xp-blue-dark: #0a246a;
+  --xp-blue-mid: #3a6ea5;
+  --xp-blue-light: #a6caf0;
+  --xp-desktop: #3a6ea5;
+  --xp-taskbar: linear-gradient(180deg, #2d76e0 0%, #1c53c8 5%, #1447b8 50%, #0b3aa8 95%, #0a2e9c 100%);
+  --xp-start-green: linear-gradient(180deg, #6fd647 0%, #3fae1e 50%, #2a8a1e 100%);
+  --font: "Tahoma", "Segoe UI", Verdana, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font);
+  overflow: hidden;
+  user-select: none;
+}
+
+#desktop {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: var(--xp-desktop) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%233a6ea5'/%3E%3C/svg%3E");
+  background-image:
+    radial-gradient(ellipse at 50% 40%, #6fa8dc 0%, #3a6ea5 55%, #1b4a80 100%);
+  padding: 12px;
+}
+
+/* ---------- Desktop icons ---------- */
+.icons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 4px;
+  height: calc(100% - 20px);
+  align-content: flex-start;
+}
+
+.icon {
+  width: 74px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px;
+  cursor: pointer;
+  border: 1px dotted transparent;
+  border-radius: 2px;
+}
+
+.icon:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08); }
+
+.icon .glyph {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+.icon .glyph img.icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.6));
+}
+
+.title-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.task-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.icon .label {
+  color: #fff;
+  font-size: 11px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  line-height: 1.2;
+}
+
+/* ---------- Windows ----------
+   Visual chrome (borders, title bar gradient, buttons, window-body
+   padding) now comes from XP.css (the .window / .title-bar /
+   .title-bar-controls / .window-body classes). This file only adds
+   the behavior XP.css doesn't know about: absolute positioning,
+   drag/resize, minimize, and making window-body fill the window. */
+.xp-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  min-height: 160px;
+}
+
+/* Double-class selector so this wins over XP.css's own `.window` rule
+   for overflow/box-sizing no matter which stylesheet loads last —
+   otherwise the title bar icon and min/max/close buttons can spill
+   outside the window's border instead of being clipped by it. */
+.xp-window.window {
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.xp-window.window * {
+  box-sizing: border-box;
+}
+
+.xp-window.minimized { display: none; }
+
+/* Make XP.css's window-body stretch to fill the rest of the window
+   instead of sizing to its content. */
+.xp-window .window-body {
+  flex: 1;
+  overflow: auto;
+}
+
+.xp-window.window .title-bar {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.title-bar-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  padding-left: 2px;
+}
+
+.title-bar-controls {
+  flex-shrink: 0;
+}
+
+.resize-handle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: 0;
+  bottom: 0;
+  cursor: nwse-resize;
+  z-index: 2;
+}
+
+/* ---------- Explorer-style chrome (menu bar / toolbar / address bar / sidebar) ----------
+   XP.css doesn't ship these (they're specific to a File Explorer /
+   Internet Explorer window), so they stay custom. The status bar at
+   the bottom uses XP.css's own .status-bar / .status-bar-field. */
+.explorer-menubar {
+  background: linear-gradient(180deg, #fbfbf8, #e9e6d8);
+  border-bottom: 1px solid #b8b5a4;
+  display: flex;
+  gap: 16px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #333;
+}
+
+.explorer-menubar span { cursor: default; padding: 1px 4px; border-radius: 2px; }
+.explorer-menubar span:hover { background: #c6d8f0; }
+
+.explorer-toolbar {
+  background: linear-gradient(180deg, #fdfdfb, #ece9d9);
+  border-bottom: 1px solid #b8b5a4;
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+}
+
+.explorer-toolbar .tb-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #234;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.explorer-toolbar .tb-btn:hover { background: #c6d8f0; border: 1px solid #7fa8dd; padding: 3px 7px; }
+.explorer-toolbar .tb-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+.explorer-toolbar .sep { width: 1px; height: 22px; background: #c9c6b8; margin: 0 6px; }
+
+.explorer-addressbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  background: #fff;
+  border-bottom: 1px solid #d8d5c5;
+}
+
+.explorer-addressbar .addr-label { font-size: 11px; color: #555; }
+
+.explorer-addressbar .addr-field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #7f9db9;
+  border-radius: 2px;
+  padding: 3px 8px;
+  font-size: 12px;
+  background: #fff;
+}
+
+.explorer-addressbar .addr-field img { width: 14px; height: 14px; }
+
+.explorer-addressbar .addr-caret {
+  margin-left: auto;
+  font-size: 9px;
+  color: #667;
+}
+
+.explorer-addressbar .go-btn {
+  font-size: 11px;
+  background: linear-gradient(180deg, #fdfdfb, #e5e2d2);
+  border: 1px solid #9a9686;
+  border-radius: 2px;
+  padding: 3px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.explorer-addressbar .go-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.explorer-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.explorer-sidebar {
+  width: 170px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #dce8fb, #c3d9f5);
+  border-right: 1px solid #a9c3e0;
+  padding: 8px;
+  overflow-y: auto;
+  font-size: 11px;
+}
+
+.sidebar-section { margin-bottom: 10px; }
+
+.sidebar-title {
+  background: linear-gradient(180deg, #3a7ce0, #1c53c8);
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 3px 3px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-title .collapse-arrow {
+  font-size: 8px;
+  opacity: 0.85;
+}
+
+.sidebar-list {
+  background: #fff;
+  border: 1px solid #a9c3e0;
+  border-top: none;
+  padding: 3px 0;
+}
+
+.sidebar-list div {
+  padding: 3px 10px;
+  color: #1a4faa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-list .item-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.sidebar-list div:hover { background: #dbe9fb; text-decoration: underline; }
+
+/* ---------- Dark / hero content panel (e.g. About Me) ---------- */
+.explorer-main.dark-content {
+  background: linear-gradient(160deg, #3f5fd8 0%, #35399e 60%, #2a2c7a 100%);
+  color: #fff;
+}
+
+.about-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.about-avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #ffd27a, #e08a1e);
+  border: 2px solid rgba(255,255,255,0.7);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.about-text p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* explorer-main also carries the window-body class (from XP.css) for
+   consistent padding/background — this override just re-adds the
+   flex sizing so it still shares space correctly with the sidebar. */
+.explorer-main.window-body {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+/* ---------- Taskbar ---------- */
+#taskbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 34px;
+  background: var(--xp-taskbar);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  gap: 6px;
+  box-shadow: 0 -1px 4px rgba(0,0,0,0.4);
+  z-index: 9999;
+}
+
+#start-btn {
+  height: 26px;
+  padding: 0 14px 0 8px;
+  background: var(--xp-start-green);
+  background: linear-gradient(180deg, #7ee065 0%, #3fae1e 45%, #2a8a1e 100%);
+  border-radius: 4px 10px 10px 4px;
+  color: #fff;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+#start-btn:active, #start-btn.open { filter: brightness(0.9); }
+
+#taskbar-items {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  height: 26px;
+}
+
+.task-item {
+  background: linear-gradient(180deg, #2f5db0, #16389c);
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 3px;
+  color: #fff;
+  font-size: 11px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.task-item.active { background: linear-gradient(180deg, #1a3f8f, #0b2870); box-shadow: inset 0 0 4px rgba(0,0,0,0.6); }
+
+#clock {
+  color: #fff;
+  font-size: 11px;
+  padding: 0 12px;
+  border-left: 1px solid rgba(255,255,255,0.3);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- Start menu ---------- */
+#start-menu {
+  position: fixed;
+  left: 4px;
+  bottom: 34px;
+  width: 220px;
+  background: #fff;
+  border: 1px solid var(--xp-blue-dark);
+  border-radius: 6px 6px 0 0;
+  box-shadow: 2px -2px 10px rgba(0,0,0,0.4);
+  display: none;
+  overflow: hidden;
+  z-index: 10000;
+}
+
+#start-menu.open { display: block; }
+
+#start-menu .header {
+  background: linear-gradient(180deg, #2657d1 0%, #3a86ea 8%, #1b52d6 40%, #0f3fc0 92%, #0a2e9c 100%);
+  color: #fff;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#start-menu ul { list-style: none; margin: 0; padding: 6px 0; }
+
+#start-menu li {
+  padding: 8px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #222;
+}
+
+#start-menu li:hover { background: var(--xp-blue-light); }
+
+/* ---------- Boot + login overlay screens ---------- */
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+}
+
+.screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#app-shell {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+#app-shell.visible { opacity: 1; }
+
+/* Boot screen */
+#boot-screen {
+  background: #000;
+  flex-direction: column;
+  color: #fff;
+}
+
+#boot-logo {
+  font-size: 42px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #9f6fdc, #ffffff, #866fdc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 6px;
+}
+
+#boot-sub {
+  font-size: 13px;
+  color: #ba9ddd;
+  margin-bottom: 46px;
+  letter-spacing: 2px;
+}
+
+#boot-bar-track {
+  width: 220px;
+  height: 14px;
+  border: 1px solid #3a5a8a;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  padding: 2px;
+  gap: 3px;
+  background: #050a14;
+}
+
+.boot-chunk {
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(180deg, #a36fdc, #7226d1);
+  border-radius: 1px;
+  opacity: 0;
+  animation: bootChunk 1.4s ease-in-out infinite;
+}
+
+.boot-chunk:nth-child(1) { animation-delay: 0s; }
+.boot-chunk:nth-child(2) { animation-delay: 0.12s; }
+.boot-chunk:nth-child(3) { animation-delay: 0.24s; }
+.boot-chunk:nth-child(4) { animation-delay: 0.36s; }
+.boot-chunk:nth-child(5) { animation-delay: 0.48s; }
+.boot-chunk:nth-child(6) { animation-delay: 0.60s; }
+.boot-chunk:nth-child(7) { animation-delay: 0.72s; }
+.boot-chunk:nth-child(8) { animation-delay: 0.84s; }
+.boot-chunk:nth-child(9) { animation-delay: 0.96s; }
+.boot-chunk:nth-child(10) { animation-delay: 1.08s; }
+@keyframes bootChunk {
+  0%   { opacity: 0.15; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.15; }
+}
+
+#boot-hint {
+  position: absolute;
+  bottom: 26px;
+  font-size: 11px;
+  color: #8f5faa;
+}
+
+/* Login screen */
+#login-screen {
+  background: radial-gradient(ellipse at 50% 30%, #a64dc4 0%, #6926a8 55%, #401272 100%);
+  flex-direction: column;
+  color: #fff;
+}
+
+#login-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 14px 22px;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0));
+}
+
+#login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 18px 26px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+#login-card:hover { background: rgba(255,255,255,0.08); }
+
+#login-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #250041, #5f3e97);
+  border: 2px solid rgba(255,255,255,0.7);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+#login-name {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#login-hint {
+  font-size: 11px;
+  color: #cfe0f7;
+}
+
+#login-footer {
+  position: absolute;
+  bottom: 20px;
+  font-size: 11px;
+  color: #cfe0f7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#welcome-text {
+  position: absolute;
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#welcome-text.show { opacity: 1; }.resume-toolbar {
+    display: flex;
+    gap: 6px;
+    padding: 8px;
+    background: #ece9d8;
+    border-bottom: 1px solid #aca899;
+}
+.resume-toolbar .tb-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    text-decoration: none;
+    color: #000;
+}
+.resume-toolbar .tb-btn:hover {
+    background: #d3e4fd;
+    border: 1px solid #6ea1e0;
+}
+.tb-icon {
+    width: 16px;
+    height: 16px;
+}
+.resume-scroll {
+    overflow: auto;
+    height: calc(100% - 40px);
+    background: #808080;
+    padding: 20px;
+    text-align: center;
+}

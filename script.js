@@ -4,6 +4,7 @@
 const bootScreen = document.getElementById("boot-screen");
 const loginScreen = document.getElementById("login-screen");
 const loginCard = document.getElementById("login-card");
+const loginFrame = document.querySelector(".xp-login-frame");
 const welcomeText = document.getElementById("welcome-text");
 const appShell = document.getElementById("app-shell");
 
@@ -21,7 +22,11 @@ loginCard.addEventListener("click", logIn);
 
 function logIn() {
     loginCard.style.pointerEvents = "none";
-    welcomeText.classList.add("show");
+    loginFrame.classList.add("hide");
+
+    setTimeout(() => {
+        welcomeText.classList.add("show");
+    }, 400);
 
     setTimeout(() => {
         loginScreen.classList.add("fade-out");
@@ -29,7 +34,201 @@ function logIn() {
             loginScreen.style.display = "none";
             appShell.classList.add("visible");
         }, 600);
-    }, 900);
+    }, 1300);
+}
+
+// ---------------------------------------------------------------
+// "My Projects" as a fake late-90s/2000s search engine.
+// To add a project later, just add an object to PROJECTS below —
+// everything else (rendering + search filter) is automatic.
+// ---------------------------------------------------------------
+const PROJECTS = [
+    {
+        title: "Affiche Evelynne Axell",
+        url: "silly-os.local/portfolio/projets/affiche-axell",
+        desc: "Affiche pour l'exposition fictive de Evelynne Axell au Musée d'art contemporain.",
+        tags: ["Design", "Affiche", "Illustration"],
+        image: "http://www.image-heberg.fr/files/17799349731072417184.png",
+        link: "https://drive.google.com/file/d/11WxYHSJiqjsr2f_F0ArDcBD5uq_tXjYu/view?usp=sharing",
+    },
+    
+ {
+        title: "Affiche de concert Insane Clown Posse!",
+        url: "silly-os.local/portfolio/projets/affiche-icp",
+        desc: "Affiche pour le concert de Insane Clwn Posse, dans le style Swissted.",
+        tags: ["Design", "Affiche", "Illustration"],
+        image: "https://www.image-heberg.fr/files/17722959451235490333.png",
+        link: "https://www.image-heberg.fr/files/17722959451235490333.png",
+    },
+    
+    {
+        title: "Pub Flora Gucci",
+        url: "silly-os.local/portfolio/projets/pub-flora",
+        desc: "Un mockup fais en collaboration pour une publicité.",
+        tags: ["Publicité", "Collaboratif"],
+        image: "https://image.noelshack.com/fichiers/2026/36/3/1788373144-mockup.png",
+        link: "https://drive.google.com/drive/folders/1LPzavSL3eCfmo5cXGz4ang-ZFnPsYqqe",
+    },
+    
+     {
+        title: "Noodles Studio",
+        url: "silly-os.local/portfolio/projets/noodlez",
+        desc: "Logo et charte graphique pour une marque fictive de vente de nouilles",
+        tags: ["Design", "Logo","Branding"],
+        image: "https://image.noelshack.com/fichiers/2026/36/3/1788373143-logo-noodles.png",
+        link: "https://drive.google.com/drive/folders/13_zx-Mh8qHjlZWkhObGA_Y-iZBeem61A",
+    },
+    
+         {
+        title: "Silly Links",
+        url: "silly-os.local/portfolio/projets/silly-links",
+        desc: "Site personnel regroupant mes résaux sociaux ",
+        tags: ["Design", "Project Perso","Branding","Web"],
+        image: "https://image.noelshack.com/fichiers/2026/36/3/1788373880-pperso.png",
+        link: "https://sillylinks.duckdns.org",
+    },
+    
+             {
+        title: "Project Mareis",
+        url: "silly-os.local/portfolio/projets/mareis",
+        desc: "Site pour une association fictive pour la protection maritime ",
+        tags: ["Collaboratif","Web"],
+        image: "https://image.noelshack.com/fichiers/2026/36/3/1788374110-site-maeries.jpg",
+        link: "https://sallyanicet-gif.github.io/sae-1.05/",
+    },
+    
+            {
+        title: "An apple a day...",
+        url: "silly-os.local/portfolio/projets/bad-apple",
+        desc: "Une affiche réaliser avec Adobe Illustrator pour un single appeler 'an apple a day' par horsegiirL",
+        tags: ["Project perso","Design","Affiche"],
+        image: "http://www.image-heberg.fr/files/17875409633740919566.png",
+        link: "https://www.instagram.com/p/DcKomFHsXCh/?utm_source=ig_web_copy_link&igsi=NTc4MTIwNjQ2YQ==",
+    }, 
+    
+              {
+        title: "Affiche Baki",
+        url: "silly-os.local/portfolio/projets/i-got-that-dawg-in-me",
+        desc: "Une affiche réaliser sur photoshop pourl'anime Baki(2018) sur Netflix ",
+        tags: ["Design","Affiche","Project Perso"],
+        image: "http://www.image-heberg.fr/files/17875411362566168416.png",
+        link: "https://www.instagram.com/p/DcZTJRdOOOO/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+    },
+    
+                 {
+        title: "Portrait Plastique",
+        url: "silly-os.local/portfolio/projets/skull-but-inside",
+        desc: "Montage Photoshop Créatif",
+        tags: ["Design"],
+        image: "https://www.image-heberg.fr/files/17722963212414680389.png",
+        link: "https://www.image-heberg.fr/files/17722963212414680389.png",
+    },
+    
+              {
+        title: "Flyer BUT MMI",
+        url: "silly-os.local/portfolio/projets/jpo-but",
+        desc: "Flyer informationnel pour le BUT MMI",
+        tags: ["Design"],
+        image: "https://image.noelshack.com/fichiers/2026/36/3/1788377831-flyer-illustratif.png",
+        link: "https://image.noelshack.com/fichiers/2026/36/3/1788377831-flyer-illustratif.png",
+    },
+    
+               {
+        title: "Visuel Web Blackpink",
+        url: "silly-os.local/portfolio/projets/blackpink-in-ur-area",
+        desc: "Reproduction d'un visuel web de Blakcpink",
+        tags: ["Design","Affiche"],
+        image: "https://image.noelshack.com/fichiers/2026/22/4/1779971044-ex15-01.jpg",
+        link: "https://image.noelshack.com/fichiers/2026/22/4/1779971044-ex15-01.jpg",
+    },
+    
+                   {
+        title: "IMPT-Interview",
+        url: "silly-os.local/portfolio/projets/impt",
+        desc: "Direction artistique et management de project.",
+        tags: ["Branding","Audiovisuel"],
+        image: "https://image.noelshack.com/fichiers/2026/36/3/1788373143-impt.png",
+        link: "https://youtube.com/shorts/x1Lvlvfe02M?si=I-BWv-x-iVeFyxXD",
+    },
+    
+           {
+        title: "Scéne d'horreur",
+        url: "silly-os.local/portfolio/projets/boo",
+        desc: "Scéne de 1 minute de film d'horreur",
+        tags: ["Audiovisuel","Collaboratif"],
+        image: "https://image.noelshack.com/fichiers/2026/36/3/1788381636-film1.png",
+        link: "https://youtu.be/Y85a9M9mVBk?si=g2D22JzZw5bBffQy",
+    }, 
+    // Ajoute d'autres projets ici, même format :
+    // {
+    //   title: "...",
+    //   url: "silly-os.local/portfolio/projets/...",
+    //   desc: "...",
+    //   tags: ["...", "..."],
+    //   image: "chemin/vers/image.png",
+    //   link: "https://...",
+    // },
+];
+
+function buildProjectResult(p) {
+    const searchBlob = (p.title + " " + p.tags.join(" ")).toLowerCase();
+    return `
+    <div class="se-result" data-search="${searchBlob}">
+      <div class="se-result-thumb"><img src="${p.image}" alt="${p.title}"></div>
+      <div class="se-result-body">
+        <a href="${p.link}" target="_blank" class="se-result-title">${p.title}</a>
+        <div class="se-result-url">www.${p.url} <span class="se-cached">- En cache - Pages similaires</span></div>
+        <p class="se-result-desc">${p.desc}</p>
+        <div class="se-result-tags">${p.tags.map((t) => `<span class="se-tag">#${t}</span>`).join("")}</div>
+      </div>
+    </div>
+  `;
+}
+
+function buildProjectsWindowContent() {
+    const results = PROJECTS.map(buildProjectResult).join("");
+    return `
+    <div class="se-shell">
+      <div class="se-header">
+        <div class="se-logo">
+          <span style="color:#4285F4">S</span><span style="color:#EA4335">i</span><span style="color:#FBBC05">l</span><span style="color:#4285F4">l</span><span style="color:#34A853">y</span><span style="color:#EA4335">S</span><span style="color:#FBBC05">e</span><span style="color:#4285F4">a</span><span style="color:#34A853">r</span><span style="color:#EA4335">c</span><span style="color:#FBBC05">h</span><span style="color:#333">!</span>
+        </div>
+        <div class="se-searchbar">
+          <input type="text" id="se-input" class="se-input" placeholder="Rechercher un projet, un tag..." oninput="filterProjects(this.value)" />
+          <div class="se-btn" onclick="filterProjects(document.getElementById('se-input').value)">
+            <img src="icons/Search.png" class="tb-icon" alt="" /> Rechercher
+          </div>
+        </div>
+        <div class="se-stats" id="se-stats">Environ ${PROJECTS.length} résultat${PROJECTS.length > 1 ? "s" : ""} (0,04 seconde)</div>
+      </div>
+      <div class="se-results" id="se-results">
+        ${results}
+      </div>
+      <div class="se-noresults" id="se-noresults" style="display:none">
+        Aucun document ne correspond aux termes de recherche.<br />Essayez « design », « affiche » ou « illustration ».
+      </div>
+    </div>
+  `;
+}
+
+function filterProjects(query) {
+    const q = query.trim().toLowerCase();
+    const nodes = document.querySelectorAll("#se-results .se-result");
+    let count = 0;
+    nodes.forEach((node) => {
+        const match = !q || node.dataset.search.includes(q);
+        node.style.display = match ? "" : "none";
+        if (match) count++;
+    });
+    const stats = document.getElementById("se-stats");
+    const noResults = document.getElementById("se-noresults");
+    if (stats) {
+        stats.textContent =
+            count > 0
+                ? `Environ ${count} résultat${count > 1 ? "s" : ""} (0,0${Math.floor(Math.random() * 8) + 1} seconde)`
+                : `0 résultat pour "${query}"`;
+    }
+    if (noResults) noResults.style.display = count === 0 ? "block" : "none";
 }
 
 // ---------------------------------------------------------------
@@ -85,17 +284,39 @@ const APPS = {
         title: "My Projects",
         glyph: "icons/IE6.png",
         color: "#c98a2b",
-        width: 420,
-        height: 300,
-        content: `<p>List or grid of project cards goes here.</p>`
+        width: 560,
+        height: 500,
+        content: buildProjectsWindowContent(),
     },
     contact: {
         title: "Contact Me",
         glyph: "icons/Email.png",
         color: "#3f9b3f",
-        width: 320,
-        height: 200,
-        content: `<p>Drop a contact form or links here.</p>`
+        width: 340,
+        height: 400,
+        content: `
+      <form class="contact-form" onsubmit="handleContactForm(event, this)">
+        <div class="contact-field">
+          <label for="c-name">Nom</label>
+          <input type="text" id="c-name" name="name" required />
+        </div>
+        <div class="contact-field">
+          <label for="c-email">Email</label>
+          <input type="email" id="c-email" name="email" required />
+        </div>
+        <div class="contact-field">
+          <label for="c-message">Message</label>
+          <textarea id="c-message" name="message" rows="4" required minlength="10"></textarea>
+        </div>
+        <div class="contact-status" aria-live="polite"></div>
+        <div class="contact-actions">
+          <button type="submit" class="btn">Envoyer</button>
+        </div>
+        <div class="contact-alt">
+          Ou écrivez directement à <a href="mailto:neidjah.anicet@gmail.com">neidjah.anicet@gmail.com</a>
+        </div>
+      </form>
+    `
     },
 curryvital: {
     title: "My Resume",
@@ -121,6 +342,48 @@ curryvital: {
     `
 }
 };
+
+// ---------------------------------------------------------------
+// Contact form (Formspree AJAX) — used by the "Contact Me" window
+// ---------------------------------------------------------------
+function handleContactForm(e, form) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    const status = form.querySelector(".contact-status");
+    const btn = form.querySelector('button[type="submit"]');
+    status.textContent = "";
+    status.className = "contact-status";
+    btn.disabled = true;
+    btn.textContent = "Envoi...";
+
+    fetch("https://formspree.io/f/mykbgjzo", {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+    })
+        .then((res) => {
+            if (res.ok) {
+                status.textContent = "Message envoyé ! Merci 👻";
+                status.classList.add("success");
+                form.reset();
+            } else {
+                throw new Error("Server error");
+            }
+        })
+        .catch(() => {
+            status.textContent = "Oups, une erreur est survenue. Réessayez ou écrivez par email.";
+            status.classList.add("error");
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.textContent = "Envoyer";
+        });
+}
 
 const desktopIcons = document.getElementById("icons");
 const taskbarItems = document.getElementById("taskbar-items");
@@ -377,13 +640,37 @@ document.addEventListener("click", (e) => {
     }
 });
 
-startMenu.querySelectorAll("li[data-open]").forEach((li) => {
-    li.addEventListener("click", () => {
-        openWindow(li.dataset.open);
+startMenu.querySelectorAll(".sm-item[data-open]").forEach((item) => {
+    item.addEventListener("click", () => {
+        openWindow(item.dataset.open);
         startMenu.classList.remove("open");
         startBtn.classList.remove("open");
     });
 });
+
+// "Fermer la session" sends you back to the login screen, XP-style.
+const smLogoff = document.getElementById("sm-logoff");
+if (smLogoff) {
+    smLogoff.addEventListener("click", () => {
+        startMenu.classList.remove("open");
+        startBtn.classList.remove("open");
+        appShell.classList.remove("visible");
+        loginScreen.style.display = "flex";
+        loginScreen.classList.remove("fade-out");
+        loginFrame.classList.remove("hide");
+        welcomeText.classList.remove("show");
+        loginCard.style.pointerEvents = "auto";
+    });
+}
+
+// "Arrêter" is decorative for now — just closes the menu.
+const smShutdown = document.getElementById("sm-shutdown");
+if (smShutdown) {
+    smShutdown.addEventListener("click", () => {
+        startMenu.classList.remove("open");
+        startBtn.classList.remove("open");
+    });
+}
 
 function updateClock() {
     const now = new Date();

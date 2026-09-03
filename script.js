@@ -1,6 +1,22 @@
 // ---------------------------------------------------------------
 // Boot -> Login -> Welcome -> Desktop sequence
 // ---------------------------------------------------------------
+
+// Mobile browsers change the visible viewport height when the address
+// bar shows/hides, which breaks plain `100vh`. We measure the real
+// available height in JS and expose it as a CSS variable instead.
+function setAppHeight() {
+    document.documentElement.style.setProperty("--app-height", window.innerHeight + "px");
+}
+setAppHeight();
+window.addEventListener("resize", setAppHeight);
+window.addEventListener("orientationchange", () => setTimeout(setAppHeight, 250));
+
+// True on phones/small tablets (matches the CSS mobile breakpoint).
+function isMobileLayout() {
+    return window.matchMedia("(max-width: 820px)").matches;
+}
+
 const bootScreen = document.getElementById("boot-screen");
 const loginScreen = document.getElementById("login-screen");
 const loginCard = document.getElementById("login-card");
@@ -491,8 +507,10 @@ function openWindow(appId) {
     openWindows[winId] = { el: win, taskEl, minimized: false };
 
     // Wire up interactions
-    makeDraggable(win, win.querySelector(".title-bar"));
-    makeResizable(win, win.querySelector(".resize-handle"));
+    if (!isMobileLayout()) {
+        makeDraggable(win, win.querySelector(".title-bar"));
+        makeResizable(win, win.querySelector(".resize-handle"));
+    }
 
     win.addEventListener("mousedown", () => focusWindow(winId));
     taskEl.addEventListener("click", () => {

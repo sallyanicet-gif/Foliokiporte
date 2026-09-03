@@ -5,6 +5,8 @@
     <title>XP Window Manager Starter</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://unpkg.com/xp.css" />
+      <link rel="shortcut icon" href="https://image.noelshack.com/fichiers/2026/35/6/1788035099-netmeeting.png">
+
   </head>
   <body>
     <!-- Boot screen -->
@@ -26,16 +28,35 @@
       <div id="boot-hint">Press F11 for full screen</div>
     </div>
 
-    <!-- Login screen -->
-    <div id="login-screen" class="screen" style="display: none">
-      <div id="login-header">Silly OS</div>
-      <div id="login-card">
-        <div id="login-avatar"><img src="icons/aboutme.png" alt="Girl in a jacket" width="64" height="64" /></div>
-        <div id="login-name">Neidjah ANICET</div>
-        <div id="login-hint">Click your picture to log in</div>
+    <!-- Login screen (Windows XP style) -->
+    <div id="login-screen" class="screen xp-login" style="display: none">
+      <div class="xp-login-frame">
+        <div class="xp-login-main">
+          <div class="xp-login-left">
+            <img src="icons/sillyos.png" alt="Silly OS" class="xp-brand-img" />
+            <div class="xp-instruction">To begin, click your user name</div>
+          </div>
+
+          <div class="xp-divider"></div>
+
+          <div class="xp-login-right">
+            <div id="login-card" class="xp-user-tile">
+              <div id="login-avatar" class="xp-avatar"><img src="icons/aboutme.png" alt="Neidjah ANICET" width="48" height="48" /></div>
+              <div id="login-name" class="xp-username">Neidjah ANICET</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="xp-login-bottom">
+          <div class="xp-poweroff">
+            <img src="icons/power.png" alt="" class="xp-power-icon" width="26" height="26" />
+            <span>Turn off computer</span>
+          </div>
+          <div class="xp-bottom-hint">Click the user tile above to enter my portfolio.</div>
+        </div>
       </div>
+
       <div id="welcome-text">Welcome</div>
-      <div id="login-footer">Visual Designer</div>
     </div>
 
     <!-- Desktop app shell (hidden until login) -->
@@ -45,19 +66,66 @@
       </div>
 
       <div id="taskbar">
-        <div id="start-btn"><span>&#9635;</span> start</div>
+        <div id="start-btn"><img src="icons/startup.png" alt="" class="start-icon" /> start</div>
         <div id="taskbar-items"></div>
         <div id="clock">12:00 PM</div>
       </div>
 
       <div id="start-menu">
-        <div class="header">User</div>
-        <ul>
-          <li data-open="about">About Me</li>
-          <li data-open="projects">My Projects</li>
-          <li data-open="contact">Contact Me</li>
-          <li data-open="curryvital">Curriculum Vitae.doc</li>
-        </ul>
+        <div class="sm-header">
+          <img src="icons/aboutme.png" alt="" class="sm-avatar" />
+          <span class="sm-username">Neidjah ANICET</span>
+        </div>
+
+        <div class="sm-body">
+          <div class="sm-col sm-col-left">
+            <div class="sm-item" data-open="about">
+              <img src="icons/aboutme.png" class="sm-item-icon" alt="" />
+              <div class="sm-item-text">
+                <div class="sm-item-title">About Me</div>
+                <div class="sm-item-sub">Qui je suis</div>
+              </div>
+            </div>
+            <div class="sm-item" data-open="projects">
+              <img src="icons/IE6.png" class="sm-item-icon" alt="" />
+              <div class="sm-item-text">
+                <div class="sm-item-title">My Projects</div>
+                <div class="sm-item-sub">SillySearch!</div>
+              </div>
+            </div>
+            <div class="sm-item" data-open="contact">
+              <img src="icons/Email.png" class="sm-item-icon" alt="" />
+              <div class="sm-item-text">
+                <div class="sm-item-title">Contact Me</div>
+                <div class="sm-item-sub">Discutons ensemble</div>
+              </div>
+            </div>
+            <div class="sm-item" data-open="curryvital">
+              <img src="icons/Generic Text Document.png" class="sm-item-icon" alt="" />
+              <div class="sm-item-text">
+                <div class="sm-item-title">Curriculum Vitae.doc</div>
+                <div class="sm-item-sub">Mon parcours</div>
+              </div>
+            </div>
+
+            <div class="sm-allprograms">
+              <span>Tous les programmes</span>
+              <span class="sm-arrow"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sm-footer">
+          <div class="sm-footer-btn" id="sm-logoff">
+            <img src="icons/Standby.png" alt="" class="st-btn-icon" />
+            <span class="sm-footer-icon sm-icon-logoff"></span>
+            Fermer la session
+          </div>
+          <div class="sm-footer-btn" id="sm-shutdown">
+            <img src="icons/power.png" class="sm-footer-icon" alt="" />
+            Arrêter
+          </div>
+        </div>
       </div>
     </div>
 

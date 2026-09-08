@@ -292,8 +292,9 @@ const APPS = {
         <div>
       <h2 style="margin-top:0;">About Me</h2>
         <img src="icons/pfp.png" alt="Photo de profil" style="float:right; width:220px; margin:0 0 10px 15px; border:2px solid #3a6ea5;">
-      <p>Passionnée par le design et le développement web, je combine créativité et expertise technique pour donner vie à des projets uniques.</p>
-      <p>Je m'efforce de créer des solutions élégantes qui résolvent des problèmes réels. Quand je ne crée pas, j'explore les tendances du design ou je travaille sur des illustrations digitales.</p>
+      <p>Passionnée par le design et le développement web, je combine créativité et rigueur technique pour donner vie à des projets qui ont du sens. Mon objectif : créer des solutions élégantes qui résolvent de vrais problèmes. </p>
+      <p>JEntre deux projets, on me trouve en train d'explorer les dernières tendances design ou de peaufiner une illustration digitale. </p>
+      <p>Côté détente, je suis fan de MOBA (League of Legends) et de jeux plus posés comme Stardew Valley et je stream tout ça sur Twitch, où j'essaie petit à petit de faire grandir ma communauté. </p>
     `
     },
     projects: {

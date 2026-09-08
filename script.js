@@ -253,7 +253,7 @@ function filterProjects(query) {
 // ---------------------------------------------------------------
 const APPS = {
     about: {
-        title: "About US",
+        title: "About Me",
         glyph: "icons/aboutme.png",
         color: "#3a6ea5",
         width: 620,
